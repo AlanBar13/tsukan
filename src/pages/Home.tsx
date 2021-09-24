@@ -1,7 +1,8 @@
-import { IonContent, IonPage, IonLabel, IonGrid, IonRow, IonCol, IonList, IonListHeader, IonFab, IonIcon, IonFabButton } from '@ionic/react';
+import { IonContent, IonPage, IonLabel, IonGrid, IonRow, IonCol, IonList, IonListHeader, IonFab, IonIcon, IonFabButton, useIonModal } from '@ionic/react';
 import { useState, useEffect} from 'react'
 import { add } from 'ionicons/icons';
 import ListItem from '../components/ListItem'
+import AddChargeMd from '../components/AddChargeMd'
 import { Item } from '../models'
 import './Home.css';
 
@@ -13,12 +14,23 @@ const Home: React.FC = () => {
         { id: 4, title: "Title 4", category: "category 4", amount: 400, sign: "-", timestamp: "2021-09-20" },
     ]
 
-    const [xpense, setXpense] = useState(0)
-    const [income, setIncome] = useState(0)
-    const [total, setTotal] = useState(0)
+    const categories: string[] = ["Cuidado Personal", "Deuda", "Entretenmiento", "Hogar", "Mascotas", "Otros", "Salud", "Seguros", "Servicios", "Telefonia", "Transporte", "Inversiones"]
+
+    const [xpense, setXpense] = useState<number>(0)
+    const [income, setIncome] = useState<number>(0)
+    const [total, setTotal] = useState<number>(0)
 
     useEffect(() => {
         getTotal(items)
+    })
+
+    const handleDimiss = () => {
+        dismiss()
+    }
+
+    const [present, dismiss] = useIonModal(AddChargeMd, {
+        onDismiss: handleDimiss,
+        categories
     })
 
     const getTotal = (items: Item[]) => {
@@ -51,13 +63,13 @@ const Home: React.FC = () => {
                 <IonGrid>
                     <IonRow>
                         <IonCol>
-                            <div className="item num">
+                            <div className="main-block">
                                 <h4>$ {xpense.toFixed(2)}</h4>
                                 <h5>Expense</h5>
                             </div>
                         </IonCol>
                         <IonCol>
-                            <div className="item num">
+                            <div className="main-block">
                                 <h4>$ {income.toFixed(2)}</h4>
                                 <h5>Income</h5>
                             </div>
@@ -71,7 +83,9 @@ const Home: React.FC = () => {
                     { showList(items) }
                 </IonList>
                 <IonFab vertical="bottom" horizontal="end" slot="fixed">
-                    <IonFabButton>
+                    <IonFabButton onClick={() => {
+                        present()
+                    }}>
                         <IonIcon icon={add}></IonIcon>
                     </IonFabButton>
                 </IonFab>
