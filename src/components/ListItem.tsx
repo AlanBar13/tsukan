@@ -5,12 +5,14 @@ import { Item } from '../models'
 
 const ListItem: React.FC<{ item: Item }> = ({ item }) => {
     return (
-        <IonItem>
-            {item.sign === '+' ? <IonIcon icon={addCircleOutline}></IonIcon> : <IonIcon icon={removeCircleOutline}></IonIcon>}
-            <IonLabel>{item.title}</IonLabel>
-            <IonLabel>{item.category}</IonLabel>
-            <IonLabel>$ {item.amount.toFixed(2)}</IonLabel>
-        </IonItem>
+        <div className="list-item">
+            <IonItem>
+                {item.sign === '+' ? <IonIcon icon={addCircleOutline}></IonIcon> : <IonIcon icon={removeCircleOutline}></IonIcon>}
+                <IonLabel>{item.title}</IonLabel>
+                <IonLabel>{item.category}</IonLabel>
+                <IonLabel>$ {item.amount.toFixed(2)}</IonLabel>
+            </IonItem>
+        </div>
     )
 }
 
