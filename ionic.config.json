@@ -1,0 +1,7 @@
+{
+  "name": "xpense-react",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
