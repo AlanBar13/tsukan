@@ -11,6 +11,13 @@ const Home: React.FC = () => {
         { id: 3, title: "Title 3", category: "category 3", amount: 300.50, sign: "+", timestamp: "2021-09-20" },
         { id: 4, title: "Title 4", category: "category 4", amount: 400, sign: "-", timestamp: "2021-09-20" },
     ]
+
+    const showList = (items: Item[]) => {
+        return items.map((i) => {
+            return <ListItem key={i.id} item={i} />
+        })
+    }
+
     return (
         <IonPage>
             <IonContent fullscreen>
@@ -37,7 +44,7 @@ const Home: React.FC = () => {
                     <IonListHeader>
                         <IonLabel>Recent Charges</IonLabel>
                     </IonListHeader>
-                    <ListItem item={items[0]} />
+                    { showList(items) }
                 </IonList>
                 <IonFab vertical="bottom" horizontal="end" slot="fixed">
                     <IonFabButton>
