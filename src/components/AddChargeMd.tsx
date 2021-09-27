@@ -1,16 +1,31 @@
 import { IonLabel, IonList, IonListHeader, IonToolbar, IonButtons, IonButton, IonTitle, IonItem, IonInput, IonSelect, IonSelectOption, } from '@ionic/react';
 import { useState } from 'react'
 
-const AddChargeMd: React.FC<{ onDismiss: () => void; categories: string[]; addItem: (title: string, category: string, amount: number, sign: string) => void }> = ({ onDismiss, categories, addItem }) => {
+const xpCategories: string[] = ["Cuidado Personal", "Deuda", "Entretenmiento", "Hogar", "Mascotas", "Otro", "Salud", "Seguros", "Servicios", "Telefonia", "Transporte", "Inversiones"]
+const inCategories: string[] = ["Salario", "Pago Deuda", "Ganancias", "Otro"]
+
+const AddChargeMd: React.FC<{ onDismiss: () => void; addItem: (title: string, category: string, amount: number, sign: string) => void }> = ({ onDismiss, addItem }) => {
    const [title, setTitle] = useState<string>("")
    const [amount, setAmount] = useState<string>("")
    const [category, setCategory] = useState<string>("")
    const [sign, setSign] = useState<string>("")
+   const [dis, setDis] = useState<boolean>(true)
+   const [categories, setCategories] = useState<string[]>(xpCategories)  
 
     const showCategories = () => {
         return categories.map((cat, i) => {
             return <IonSelectOption key={i} value={cat}>{cat}</IonSelectOption>
         })
+    }
+
+    const handleType = (sign: string) => {
+        setSign(sign)
+        if(sign === '+'){
+            setCategories(inCategories)
+        }else{
+            setCategories(xpCategories)
+        }
+        setDis(false)
     }
 
     const onSave = () => {
@@ -39,16 +54,16 @@ const AddChargeMd: React.FC<{ onDismiss: () => void; categories: string[]; addIt
                     <IonInput onIonChange={(e) => setAmount(e.detail.value!)} type='number'></IonInput>
                 </IonItem>
                 <IonItem className="input">
+                    <IonLabel position="floating">Type</IonLabel>
+                    <IonSelect onIonChange={e => handleType(e.detail.value)} >
+                        <IonSelectOption value={'+'}>Income</IonSelectOption>
+                        <IonSelectOption value={'-'}>Expense</IonSelectOption>
+                    </IonSelect>
+                </IonItem>
+                <IonItem disabled={dis} className="input">
                     <IonLabel position="floating">Category</IonLabel>
                     <IonSelect onIonChange={e => setCategory(e.detail.value)}>
                         {showCategories()}
-                    </IonSelect>
-                </IonItem>
-                <IonItem className="input">
-                    <IonLabel position="floating">Type</IonLabel>
-                    <IonSelect onIonChange={e => setSign(e.detail.value)} >
-                        <IonSelectOption value={'+'}>Income</IonSelectOption>
-                        <IonSelectOption value={'-'}>Expense</IonSelectOption>
                     </IonSelect>
                 </IonItem>
             </IonList>

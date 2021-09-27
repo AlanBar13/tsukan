@@ -8,14 +8,12 @@ import { nanoid } from 'nanoid'
 
 import './Home.css';
 
-let items: Item[] = [
+const items: Item[] = [
     { id: '1', title: "Title 1", category: "category 1", amount: 100, sign: "+", timestamp: "2021-09-20" },
     { id: '2', title: "Title 2", category: "category 2", amount: 200, sign: "-", timestamp: "2021-09-20" },
     { id: '3', title: "Title 3", category: "category 3", amount: 300.50, sign: "+", timestamp: "2021-09-20" },
     { id: '4', title: "Title 4", category: "category 4", amount: 400, sign: "-", timestamp: "2021-09-20" },
 ]
-
-const categories: string[] = ["Cuidado Personal", "Deuda", "Entretenmiento", "Hogar", "Mascotas", "Otros", "Salud", "Seguros", "Servicios", "Telefonia", "Transporte", "Inversiones"]
 
 const Home: React.FC = () => {  
     const [list, setList] = useState<Item[]>(items)  
@@ -47,8 +45,7 @@ const Home: React.FC = () => {
 
     const [present, dismiss] = useIonModal(AddChargeMd, {
         onDismiss: handleDimiss,
-        categories,
-        addItem
+        addItem,
     })
 
     const getTotal = (items: Item[]) => {
