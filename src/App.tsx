@@ -9,10 +9,10 @@ import {
   IonTabs,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { barChartOutline, homeOutline, mailOutline } from 'ionicons/icons';
+import { barChartOutline, homeOutline, cogOutline } from 'ionicons/icons';
 import Home from './pages/Home'
 import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+import Settings from './pages/Settings';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -44,8 +44,8 @@ const App: React.FC = () => (
           <Route exact path="/track">
             <Tab2 />
           </Route>
-          <Route path="/reminders">
-            <Tab3 />
+          <Route path="/settings">
+            <Settings />
           </Route>
           <Route exact path="/">
             <Redirect to="/home" />
@@ -60,9 +60,9 @@ const App: React.FC = () => (
             <IonIcon icon={homeOutline} />
             <IonLabel>Home</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="reminders" href="/reminders">
-            <IonIcon icon={mailOutline} />
-            <IonLabel>Reminders</IonLabel>
+          <IonTabButton tab="settings" href="/settings">
+            <IonIcon icon={cogOutline} />
+            <IonLabel>Settings</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
