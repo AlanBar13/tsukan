@@ -1,8 +1,6 @@
 import { IonLabel, IonList, IonListHeader, IonToolbar, IonButtons, IonButton, IonTitle, IonItem, IonInput, IonSelect, IonSelectOption, } from '@ionic/react';
 import { useState } from 'react'
-
-const xpCategories: string[] = ["Cuidado Personal", "Deuda", "Entretenmiento", "Hogar", "Mascotas", "Otro", "Salud", "Seguros", "Servicios", "Telefonia", "Transporte", "Inversiones"]
-const inCategories: string[] = ["Salario", "Pago Deuda", "Ganancias", "Otro"]
+import { xpCategories, inCategories } from '../models'
 
 const AddChargeMd: React.FC<{ onDismiss: () => void; addItem: (title: string, category: string, amount: number, sign: string) => void }> = ({ onDismiss, addItem }) => {
    const [title, setTitle] = useState<string>("")
