@@ -1,24 +1,25 @@
 import { IonLabel, IonList, IonListHeader, IonToolbar, IonButtons, IonButton, IonTitle, IonItem, IonInput, IonSelect, IonSelectOption, } from '@ionic/react';
 import { useState } from 'react'
 
-const AddChargeMd: React.FC<{ onDismiss: () => void; categories: string[] }> = ({ onDismiss, categories }) => {
+const AddChargeMd: React.FC<{ onDismiss: () => void; categories: string[]; addItem: (title: string, category: string, amount: number, sign: string) => void }> = ({ onDismiss, categories, addItem }) => {
    const [title, setTitle] = useState<string>("")
    const [amount, setAmount] = useState<string>("")
    const [category, setCategory] = useState<string>("")
    const [sign, setSign] = useState<string>("")
 
     const showCategories = () => {
-        return categories.map((cat) => {
-            return <IonSelectOption value={cat}>{cat}</IonSelectOption>
+        return categories.map((cat, i) => {
+            return <IonSelectOption key={i} value={cat}>{cat}</IonSelectOption>
         })
     }
 
     const onSave = () => {
-        console.log(title, amount, category, sign)
+        addItem(title, category, Number(amount), sign)
+        onDismiss()
     }
 
     return (
-        <div>
+        <>
             <IonToolbar>
                 <IonTitle>Add</IonTitle>
                 <IonButtons slot="end">
@@ -53,7 +54,7 @@ const AddChargeMd: React.FC<{ onDismiss: () => void; categories: string[] }> = (
             </IonList>
             <br />
             <IonButton onClick={onSave} expand="block">Save</IonButton>
-        </div>
+        </>
     )
 }
 
