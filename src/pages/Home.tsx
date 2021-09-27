@@ -1,25 +1,25 @@
 import { IonContent, IonPage, IonLabel, IonGrid, IonRow, IonCol, IonList, IonListHeader, IonFab, IonIcon, IonFabButton, useIonModal } from '@ionic/react';
 import { useState, useEffect} from 'react'
 import { add } from 'ionicons/icons';
+
 import ListItem from '../components/ListItem'
 import AddChargeMd from '../components/AddChargeMd'
+
+import { setStorageList, readSotrageList } from '../services/storageService'
 import { Item } from '../models'
 import { nanoid } from 'nanoid'
 
 import './Home.css';
 
-const items: Item[] = [
-    { id: '1', title: "Title 1", category: "category 1", amount: 100, sign: "+", timestamp: "2021-09-20" },
-    { id: '2', title: "Title 2", category: "category 2", amount: 200, sign: "-", timestamp: "2021-09-20" },
-    { id: '3', title: "Title 3", category: "category 3", amount: 300.50, sign: "+", timestamp: "2021-09-20" },
-    { id: '4', title: "Title 4", category: "category 4", amount: 400, sign: "-", timestamp: "2021-09-20" },
-]
-
 const Home: React.FC = () => {  
-    const [list, setList] = useState<Item[]>(items)  
+    const [list, setList] = useState<Item[]>([])  
     const [xpense, setXpense] = useState<number>(0)
     const [income, setIncome] = useState<number>(0)
     const [total, setTotal] = useState<number>(0)
+
+    useEffect(() => {
+        setList(readSotrageList())
+    }, [])
 
     useEffect(() => {
         getTotal(list)
@@ -39,8 +39,9 @@ const Home: React.FC = () => {
             sign,
             timestamp: dt.toString()
         }
-        setList([...list, newItem])
-        console.log(list)
+        const newArr = [newItem, ...list]
+        setList(newArr)
+        setStorageList(newArr)
     } 
 
     const [present, dismiss] = useIonModal(AddChargeMd, {
@@ -67,6 +68,7 @@ const Home: React.FC = () => {
         const filteredArr =  list.filter((item) => item.id !== id)
         console.log(filteredArr)
         await setList(filteredArr)
+        setStorageList(filteredArr)
     }
 
     const showList = (items: Item[]) => {
