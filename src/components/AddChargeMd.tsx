@@ -1,6 +1,6 @@
 import { IonLabel, IonList, IonListHeader, IonToolbar, IonButtons, IonButton, IonTitle, IonItem, IonInput, IonSelect, IonSelectOption, } from '@ionic/react';
 import { useState } from 'react'
-import { xpCategories, inCategories } from '../models'
+import { readArray } from '../services/categoriesService'
 
 const AddChargeMd: React.FC<{ onDismiss: () => void; addItem: (title: string, category: string, amount: number, sign: string) => void }> = ({ onDismiss, addItem }) => {
    const [title, setTitle] = useState<string>("")
@@ -8,7 +8,7 @@ const AddChargeMd: React.FC<{ onDismiss: () => void; addItem: (title: string, ca
    const [category, setCategory] = useState<string>("")
    const [sign, setSign] = useState<string>("")
    const [dis, setDis] = useState<boolean>(true)
-   const [categories, setCategories] = useState<string[]>(xpCategories)  
+   const [categories, setCategories] = useState<string[]>([])  
 
     const showCategories = () => {
         return categories.map((cat, i) => {
@@ -19,9 +19,9 @@ const AddChargeMd: React.FC<{ onDismiss: () => void; addItem: (title: string, ca
     const handleType = (sign: string) => {
         setSign(sign)
         if(sign === '+'){
-            setCategories(inCategories)
+            setCategories(readArray('+'))
         }else{
-            setCategories(xpCategories)
+            setCategories(readArray('-'))
         }
         setDis(false)
     }
