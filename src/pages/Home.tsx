@@ -10,6 +10,7 @@ import { Item } from '../models'
 import { nanoid } from 'nanoid'
 
 import './Home.css';
+const key = "_xplist"
 
 const Home: React.FC = () => {  
     const [list, setList] = useState<Item[]>([])  
@@ -18,7 +19,7 @@ const Home: React.FC = () => {
     const [total, setTotal] = useState<number>(0)
 
     useEffect(() => {
-        setList(readSotrageList())
+        setList(readSotrageList(key))
     }, [])
 
     useEffect(() => {
@@ -41,7 +42,7 @@ const Home: React.FC = () => {
         }
         const newArr = [newItem, ...list]
         setList(newArr)
-        setStorageList(newArr)
+        setStorageList(newArr, key)
     } 
 
     const [present, dismiss] = useIonModal(AddChargeMd, {
@@ -68,7 +69,7 @@ const Home: React.FC = () => {
         const filteredArr =  list.filter((item) => item.id !== id)
         console.log(filteredArr)
         await setList(filteredArr)
-        setStorageList(filteredArr)
+        setStorageList(filteredArr, key)
     }
 
     const showList = (items: Item[]) => {
