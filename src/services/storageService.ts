@@ -1,12 +1,8 @@
-import { Item } from "../models"
-const key = "_xplist"
-
-const setStorageList = (items: Item[]) => {
-    console.log(items)
+const setStorageList = (items: any[], key: string) => {
     localStorage.setItem(key, JSON.stringify(items))
 }
 
-const readSotrageList = () => {
+const readSotrageList = (key: string) => {
     const listFromStorage = localStorage.getItem(key)
     if(listFromStorage !== null){
         return JSON.parse(listFromStorage)
@@ -15,7 +11,7 @@ const readSotrageList = () => {
     }
 }
 
-const removeStorageList = () => {
+const removeStorageList = (key: string) => {
     localStorage.removeItem(key)
 }
 
