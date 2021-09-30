@@ -38,7 +38,7 @@ const Home: React.FC = () => {
             category,
             amount,
             sign,
-            timestamp: dt.toString()
+            timestamp: dt.toLocaleString()
         }
         const newArr = [newItem, ...list]
         setList(newArr)
@@ -102,7 +102,7 @@ const Home: React.FC = () => {
                 </IonGrid>
                 <IonList>
                     <IonListHeader>
-                        <IonLabel>Recent Charges</IonLabel>
+                        <IonLabel>Recent Transactions</IonLabel>
                     </IonListHeader>
                     { showList(list) }
                 </IonList>
