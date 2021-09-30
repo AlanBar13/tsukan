@@ -98,7 +98,6 @@ const getIncCatData = () => {
 
   const labelsTop3 = _.take(inCatLabels, 3)
   const dataTop3 = _.take(data, 3)
-  console.log(labelsTop3, dataTop3)
 
   const res: ChartData = {
     labels: labelsTop3,
