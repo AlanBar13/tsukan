@@ -11,8 +11,8 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import { barChartOutline, homeOutline, cogOutline } from 'ionicons/icons';
 import Home from './pages/Home'
-import Tab2 from './pages/Tab2';
 import Settings from './pages/Settings';
+import Track from './pages/Track';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -38,11 +38,11 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route exact path="/home">
+          <Route path="/home">
             <Home />
           </Route>
-          <Route exact path="/track">
-            <Tab2 />
+          <Route path="/track">
+            <Track />
           </Route>
           <Route path="/settings">
             <Settings />
