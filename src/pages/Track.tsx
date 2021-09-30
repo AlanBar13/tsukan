@@ -1,7 +1,7 @@
 import { IonContent, IonPage, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonItem, IonList, IonListHeader, IonLabel, IonGrid, IonRow, IonCol, useIonViewWillEnter } from '@ionic/react';
 import { Doughnut, Line } from 'react-chartjs-2'
 import { ChartData } from 'chart.js'
-import { useState} from 'react'
+import { useState, useEffect} from 'react'
 import { lineExpenseData, getExpCatData, getIncCatData } from '../services/stadisticsService'
 
 const Settings: React.FC = () => {
@@ -11,7 +11,7 @@ const Settings: React.FC = () => {
     const [lineData, setLineData] = useState<ChartData>(data)
     const [catXpData, setCatXpData] = useState<ChartData>(catXp)
     const [catInData, setCatInData] = useState<ChartData>(catIn)
-    const [hasData, setHasData] = useState<boolean>(false)
+    const [hasData, setHasData] = useState<boolean>(true)
 
     useIonViewWillEnter(() => {
         const data: ChartData  = lineExpenseData()!
@@ -20,6 +20,9 @@ const Settings: React.FC = () => {
         setLineData(data)
         setCatXpData(catXp)
         setCatInData(catIn)
+    })
+
+    useEffect(() => {
         if(lineData){
             setHasData(true)
         }else{

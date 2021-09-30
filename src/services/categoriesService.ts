@@ -17,8 +17,12 @@ const readArray = (type: string) => {
     }
 
     if(type === '+'){
+        setStorageList(inCategories, inKey)
+        setStorageList(xpCategories, xpKey)
         return inCategories
     }else{
+        setStorageList(inCategories, inKey)
+        setStorageList(xpCategories, xpKey)
         return xpCategories
     }
 }
