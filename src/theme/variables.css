@@ -234,3 +234,11 @@ http://ionicframework.com/docs/theming/ */
     --ion-card-background: #1e1e1e;
   }
 }
+
+body {
+  margin-top: constant(safe-area-inset-top);
+  margin-top: env(safe-area-inset-top);
+}
+ion-tab-bar {
+  margin-bottom: calc(4px + env(safe-area-inset-top));
+}
