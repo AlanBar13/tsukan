@@ -5,10 +5,21 @@ import { useState, useEffect} from 'react'
 import { lineExpenseData, getExpCatData, getIncCatData } from '../services/stadisticsService'
 
 const Settings: React.FC = () => {
-    const data: ChartData  = lineExpenseData()!
     const catXp: ChartData  = getExpCatData()!
     const catIn: ChartData  = getIncCatData()!
-    const [lineData, setLineData] = useState<ChartData>(data)
+    const res: ChartData = {
+        labels: [],
+        datasets: [
+          {
+            label: 'Expenses',
+            data: [],
+            fill: false,
+            backgroundColor: 'rgb(36, 97, 15)',
+            borderColor: 'rgba(36, 97, 15, 0.2)',
+          },
+        ],
+      };
+    const [lineData, setLineData] = useState<ChartData>(res)
     const [catXpData, setCatXpData] = useState<ChartData>(catXp)
     const [catInData, setCatInData] = useState<ChartData>(catIn)
     const [hasData, setHasData] = useState<boolean>(true)

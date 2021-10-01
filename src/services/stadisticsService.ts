@@ -25,12 +25,15 @@ const lineExpenseData = () => {
     data.push(_.sumBy(xpenses, 'amount'))
   })
 
+  const top5Labels = _.take(labels, 5)
+  const top5Data = _.take(data, 5)
+
   const res: ChartData = {
-    labels: labels,
+    labels: top5Labels,
     datasets: [
       {
         label: 'Expenses',
-        data: data,
+        data: top5Data,
         fill: false,
         backgroundColor: 'rgb(36, 97, 15)',
         borderColor: 'rgba(36, 97, 15, 0.2)',
