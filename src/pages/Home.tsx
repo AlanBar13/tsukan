@@ -38,8 +38,9 @@ const Home: React.FC = () => {
             category,
             amount,
             sign,
-            timestamp: dt.toLocaleString()
+            timestamp: dt.toISOString()
         }
+        console.log(newItem)
         const newArr = [newItem, ...list]
         setList(newArr)
         setStorageList(newArr, key)

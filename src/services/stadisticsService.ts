@@ -8,7 +8,7 @@ const key = "_xplist"
 const inKey = '_inCatList'
 const xpKey = '_xpCatList'
 
-const monthName = (item: Item) => moment(item.timestamp, 'YYYY-MM-DD').format("MMM")
+const monthName = (item: Item) => moment(item.timestamp).locale('es-mx').format("MMM")
 const catName = (item: Item) => item.category
 
 const lineExpenseData = () => {
@@ -17,6 +17,7 @@ const lineExpenseData = () => {
     return
   }
   const result = _.groupBy(list, monthName)
+  console.log(result)
   const labels = Object.keys(result).reverse()
   const data: number[] = []
   labels.map(item => {
