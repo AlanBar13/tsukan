@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonItem, IonList, IonListHeader, IonLabel, IonGrid, IonRow, IonCol, useIonViewWillEnter } from '@ionic/react';
+import { IonContent, IonPage, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonList, IonListHeader, IonLabel, useIonViewWillEnter } from '@ionic/react';
 import { Doughnut, Line } from 'react-chartjs-2'
 import { ChartData } from 'chart.js'
 import { useState, useEffect} from 'react'
