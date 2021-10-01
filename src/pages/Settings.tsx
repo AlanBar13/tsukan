@@ -1,5 +1,6 @@
 import { IonContent, IonPage, IonLabel, IonList, IonListHeader, useIonModal, IonItem } from '@ionic/react';
 import { add } from 'ionicons/icons';
+import Notification from '../services/Notification';
 
 import CategoriesMd from '../components/CategoriesMd'
 
@@ -19,12 +20,6 @@ const Settings: React.FC = () => {
                         <IonLabel>Settings</IonLabel>
                     </IonListHeader>
                 </IonList>
-                <IonItem button>
-                    <IonLabel>
-                        <h2>Reminders</h2>
-                        <p>Program reminders to make some payments</p>
-                    </IonLabel>
-                </IonItem>
                 <IonItem button onClick={() => {
                     present()
                 }}>
