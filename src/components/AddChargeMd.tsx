@@ -1,4 +1,4 @@
-import { IonLabel, IonList, IonListHeader, IonToolbar, IonButtons, IonButton, IonTitle, IonItem, IonInput, IonSelect, IonSelectOption, } from '@ionic/react';
+import { IonLabel, IonList, IonListHeader, IonToolbar, IonButtons, IonButton, IonTitle, IonItem, IonInput, IonSelect, IonSelectOption, IonContent } from '@ionic/react';
 import { useState } from 'react'
 import { readArray } from '../services/categoriesService'
 
@@ -32,7 +32,7 @@ const AddChargeMd: React.FC<{ onDismiss: () => void; addItem: (title: string, ca
     }
 
     return (
-        <>
+        <IonContent>
             <IonToolbar>
                 <IonTitle>Add</IonTitle>
                 <IonButtons slot="end">
@@ -67,7 +67,7 @@ const AddChargeMd: React.FC<{ onDismiss: () => void; addItem: (title: string, ca
             </IonList>
             <br />
             <IonButton onClick={onSave} expand="block">Save</IonButton>
-        </>
+        </IonContent>
     )
 }
 
