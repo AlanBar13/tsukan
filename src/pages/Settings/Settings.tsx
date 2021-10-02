@@ -1,17 +1,7 @@
-import { IonContent, IonPage, IonLabel, IonList, IonListHeader, useIonModal, IonItem } from '@ionic/react';
+import { IonContent, IonPage, IonLabel, IonList, IonListHeader, IonItem } from '@ionic/react';
 import { add } from 'ionicons/icons';
-import Notification from '../services/Notification';
-
-import CategoriesMd from '../components/CategoriesMd'
 
 const Settings: React.FC = () => {
-    const handleDismiss = () => [
-        dismiss()
-    ]
-    const [present, dismiss] = useIonModal(CategoriesMd, {
-        onDismiss: handleDismiss
-    })
-
     return (
         <IonPage>
             <IonContent>
@@ -20,12 +10,16 @@ const Settings: React.FC = () => {
                         <IonLabel>Settings</IonLabel>
                     </IonListHeader>
                 </IonList>
-                <IonItem button onClick={() => {
-                    present()
-                }}>
+                <IonItem button routerLink="/categories" >
                     <IonLabel>
                         <h2>Categories</h2>
                         <p>Change displayed categories</p>
+                    </IonLabel>
+                </IonItem>
+                <IonItem button routerLink="/reminders">
+                    <IonLabel>
+                        <h2>Reminders</h2>
+                        <p>Set reminders</p>
                     </IonLabel>
                 </IonItem>
             </IonContent>

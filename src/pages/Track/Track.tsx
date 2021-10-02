@@ -2,7 +2,7 @@ import { IonContent, IonPage, IonCard, IonCardContent, IonCardHeader, IonCardTit
 import { Doughnut, Line } from 'react-chartjs-2'
 import { ChartData } from 'chart.js'
 import { useState, useEffect} from 'react'
-import { lineExpenseData, getExpCatData, getIncCatData } from '../services/stadisticsService'
+import { lineExpenseData, getExpCatData, getIncCatData } from '../../services/stadisticsService'
 
 const Settings: React.FC = () => {
     const catXp: ChartData  = getExpCatData()!

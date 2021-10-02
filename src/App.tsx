@@ -11,8 +11,10 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import { barChartOutline, homeOutline, cogOutline } from 'ionicons/icons';
 import Home from './pages/Home'
-import Settings from './pages/Settings';
-import Track from './pages/Track';
+import Settings from './pages/Settings/Settings';
+import Track from './pages/Track/Track';
+import Reminders from './pages/Reminders/Reminders';
+import Categories from './pages/Categories/Categories';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -46,6 +48,12 @@ const App: React.FC = () => (
           </Route>
           <Route path="/settings">
             <Settings />
+          </Route>
+          <Route exact path="/categories">
+            <Categories />
+          </Route>
+          <Route exact path="/reminders">
+            <Reminders />
           </Route>
           <Route exact path="/">
             <Redirect to="/home" />
