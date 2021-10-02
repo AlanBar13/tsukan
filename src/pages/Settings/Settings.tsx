@@ -10,13 +10,13 @@ const Settings: React.FC = () => {
                         <IonLabel>Settings</IonLabel>
                     </IonListHeader>
                 </IonList>
-                <IonItem button routerLink="/categories" >
+                <IonItem button routerLink="/settings/categories" >
                     <IonLabel>
                         <h2>Categories</h2>
                         <p>Change displayed categories</p>
                     </IonLabel>
                 </IonItem>
-                <IonItem button routerLink="/reminders">
+                <IonItem button routerLink="/settings/reminders">
                     <IonLabel>
                         <h2>Reminders</h2>
                         <p>Set reminders</p>

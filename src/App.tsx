@@ -46,13 +46,13 @@ const App: React.FC = () => (
           <Route path="/track">
             <Track />
           </Route>
-          <Route path="/settings">
+          <Route exact path="/settings">
             <Settings />
           </Route>
-          <Route exact path="/categories">
+          <Route path="/settings/categories">
             <Categories />
           </Route>
-          <Route exact path="/reminders">
+          <Route path="/settings/reminders">
             <Reminders />
           </Route>
           <Route exact path="/">
