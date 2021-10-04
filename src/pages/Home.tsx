@@ -12,11 +12,15 @@ import { nanoid } from 'nanoid'
 import './Home.css';
 const key = "_xplist"
 
+const numberWithCommas = (x: string) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const Home: React.FC = () => {  
     const [list, setList] = useState<Item[]>([])  
-    const [xpense, setXpense] = useState<number>(0)
-    const [income, setIncome] = useState<number>(0)
-    const [total, setTotal] = useState<number>(0)
+    const [xpense, setXpense] = useState<string>("0")
+    const [income, setIncome] = useState<string>("0")
+    const [total, setTotal] = useState<string>("0")
 
     useEffect(() => {
         setList(readSotrageList(key))
@@ -61,9 +65,9 @@ const Home: React.FC = () => {
             }
         })
         ttl = inc - xp
-        setIncome(inc)
-        setXpense(xp)
-        setTotal(ttl)
+        setIncome(numberWithCommas(inc.toFixed(2)))
+        setXpense(numberWithCommas(xp.toFixed(2)))
+        setTotal(numberWithCommas(ttl.toFixed(2)))
     }
 
     const deleteItem = async (id: string) => {
@@ -83,19 +87,19 @@ const Home: React.FC = () => {
         <IonPage>
             <IonContent fullscreen>
                 <div className="title">
-                    <IonLabel><h1>Total: $ {total.toFixed(2)} MXN</h1></IonLabel>
+                    <IonLabel><h1>Total: $ {total} MXN</h1></IonLabel>
                 </div>
                 <IonGrid>
                     <IonRow>
                         <IonCol>
                             <div className="main-block">
-                                <h4>$ {xpense.toFixed(2)}</h4>
+                                <h4>$ {xpense}</h4>
                                 <h5>Expense</h5>
                             </div>
                         </IonCol>
                         <IonCol>
                             <div className="main-block">
-                                <h4>$ {income.toFixed(2)}</h4>
+                                <h4>$ {income}</h4>
                                 <h5>Income</h5>
                             </div>
                         </IonCol>

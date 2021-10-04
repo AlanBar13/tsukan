@@ -1,0 +1,17 @@
+.transaction {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.custom-font-size {
+    width: 100%;
+    margin-bottom: 2%;
+    font-size: 1.2rem !important;
+    font-weight: bold !important;
+  }
+
+.amount {
+    text-align: end;
+    font-size: 1.2rem !important;
+}
