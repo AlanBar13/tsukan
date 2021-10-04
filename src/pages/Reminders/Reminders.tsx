@@ -16,11 +16,11 @@ const RemindersMd: React.FC = () => {
 
     const handleDismiss = () => dismiss()
     
-    const deleteItem = (id: number) => {
+    const deleteItem = async (id: number) => {
         const filteredArr = reminders.filter((item) => item.id !== id)
-        console.log(filteredArr)
         setReminders(filteredArr)
         setStorageList(filteredArr, remKey)
+        await Notification.cancelPendingNotifications(id)
     }
 
     const onSave = async (body: string, selected: ScheduleEvery, selectedDate: string, day: number) => {
@@ -29,9 +29,6 @@ const RemindersMd: React.FC = () => {
         const hour = date.getHours()
         const minutes = date.getMinutes()
         if (selected === "week") {
-            console.log("week")
-            console.log(body, selected, hour, minutes, day)
-            await Notification.repeatSchedule(body, selected, hour, minutes, day)
             const reminder: Reminders = {
                 id: Math.floor(Math.random() * 1000),
                 message: body,
@@ -40,15 +37,13 @@ const RemindersMd: React.FC = () => {
                 hour,
                 minutes
             }
+            await Notification.repeatSchedule(reminder)
             const newArr = [reminder, ...reminders]
             setReminders(newArr)
             setStorageList(newArr, remKey)
             return
         }
         if (selected === "month") {
-            console.log("month")
-            console.log(body, selected, hour, minutes, dateNumber)
-            await Notification.repeatSchedule(body, selected, hour, minutes, dateNumber)
             const reminder: Reminders = {
                 id: Math.floor(Math.random() * 100),
                 message: body,
@@ -57,6 +52,7 @@ const RemindersMd: React.FC = () => {
                 hour,
                 minutes
             }
+            await Notification.repeatSchedule(reminder)
             const newArr = [reminder, ...reminders]
             setReminders(newArr)
             setStorageList(newArr, remKey)

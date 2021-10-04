@@ -1,4 +1,5 @@
-import { LocalNotifications, ScheduleEvery } from '@capacitor/local-notifications'
+import { LocalNotifications } from '@capacitor/local-notifications'
+import { Reminders } from '../models'
 
 class Notifications {
     public async schedule(hour: number, minute: number){
@@ -20,20 +21,20 @@ class Notifications {
         }
     }
 
-    public async repeatSchedule(body: string, every: ScheduleEvery, hour: number, minute: number, day: number){
+    public async repeatSchedule(reminder: Reminders){
         try{
             if(!((await LocalNotifications.requestPermissions()).display === 'granted')) return;
             await LocalNotifications.schedule({
                 notifications: [{
-                    title: 'EXPENSE Reminder',
-                    body: body,
-                    id: Math.floor(Math.random() * 100),
+                    title: 'XPENSE Recordatorio',
+                    body: reminder.message,
+                    id: reminder.id,
                     schedule:{
-                        every: every,
+                        every: reminder.every,
                         on:{
-                            day: day,
-                            hour: hour,
-                            minute: minute
+                            day: reminder.day,
+                            hour: reminder.hour,
+                            minute: reminder.minutes
                         }
                     }
                 }]
@@ -43,12 +44,11 @@ class Notifications {
         }
     }
 
-    public async cancelPendingNotifications(){
+    public async cancelPendingNotifications(id: number){
         try {
             const pending = await LocalNotifications.getPending()
             if(pending.notifications.length > 0){
-                console.log(pending)
-                await LocalNotifications.cancel(pending)
+                await LocalNotifications.cancel({ notifications: [{ id }]})
             }
         } catch (error) {
             console.log(error)
