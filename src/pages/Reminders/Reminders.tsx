@@ -83,8 +83,8 @@ const RemindersMd: React.FC = () => {
                 </IonToolbar>
                 <IonList>
                     <IonListHeader>
-                        <IonLabel>Active Reminders</IonLabel>
-                        <IonButton onClick={ () => { present()}}>Add</IonButton>
+                        <IonLabel>Recordatorios Activos</IonLabel>
+                        <IonButton onClick={ () => { present()}}>Añadir</IonButton>
                     </IonListHeader>
                     {showReminders()}
                 </IonList>

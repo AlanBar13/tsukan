@@ -62,7 +62,7 @@ const App: React.FC = () => (
         <IonTabBar slot="bottom">
           <IonTabButton tab="track" href="/track">
             <IonIcon icon={barChartOutline} />
-            <IonLabel>Track</IonLabel>
+            <IonLabel>Seguimiento</IonLabel>
           </IonTabButton>
           <IonTabButton tab="home" href="/home">
             <IonIcon icon={homeOutline} />
@@ -70,7 +70,7 @@ const App: React.FC = () => (
           </IonTabButton>
           <IonTabButton tab="settings" href="/settings">
             <IonIcon icon={cogOutline} />
-            <IonLabel>Settings</IonLabel>
+            <IonLabel>Ajustes</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

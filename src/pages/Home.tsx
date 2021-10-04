@@ -87,27 +87,30 @@ const Home: React.FC = () => {
         <IonPage>
             <IonContent fullscreen>
                 <div className="title">
-                    <IonLabel><h1>Total: $ {total} MXN</h1></IonLabel>
+                    <IonLabel>
+                        <h1>$ {total} MXN</h1>
+                        <h2>Total</h2>
+                    </IonLabel>
                 </div>
                 <IonGrid>
                     <IonRow>
                         <IonCol>
                             <div className="main-block">
                                 <h4>$ {xpense}</h4>
-                                <h5>Expense</h5>
+                                <h5>Gastos</h5>
                             </div>
                         </IonCol>
                         <IonCol>
                             <div className="main-block">
                                 <h4>$ {income}</h4>
-                                <h5>Income</h5>
+                                <h5>Ingresos</h5>
                             </div>
                         </IonCol>
                     </IonRow>
                 </IonGrid>
                 <IonList>
                     <IonListHeader>
-                        <IonLabel>Recent Transactions</IonLabel>
+                        <IonLabel>Transacciones recientes</IonLabel>
                     </IonListHeader>
                     { showList(list) }
                 </IonList>

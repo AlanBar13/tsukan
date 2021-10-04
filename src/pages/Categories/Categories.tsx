@@ -68,49 +68,49 @@ const CategoriesMd: React.FC = () => {
                     <IonButtons slot="start">
                         <IonBackButton defaultHref="/settings" />
                     </IonButtons>
-                    <IonTitle>Categories</IonTitle>
+                    <IonTitle>Categorias</IonTitle>
                 </IonToolbar>
                 <IonList>
                     <IonListHeader>
-                        <IonLabel>Income Categories</IonLabel>
+                        <IonLabel>Categorias de Ingresos</IonLabel>
                         <IonButton onClick={() => {
                             present({
-                                header: 'Add Income Category',
+                                header: 'Añadir Categoria de Ingresos',
                                 inputs: [
                                     {
                                         name: 'cat',
                                         type: 'text',
-                                        placeholder: 'New Category'
+                                        placeholder: 'Nueva Categoria'
                                     },
                                 ],
                                 buttons: [
-                                    'Cancel',
+                                    'Cancelar',
                                     { text: 'Ok', handler: (d) => addCat(d.cat, '+') },
                                 ],
                             })
-                        }} >Add</IonButton>
+                        }} >Añadir</IonButton>
                     </IonListHeader>
                     {showInCat()}
                 </IonList>
                 <IonList>
                     <IonListHeader>
-                        <IonLabel>Expense Categories</IonLabel>
+                        <IonLabel>Categorias de Gastos</IonLabel>
                         <IonButton onClick={() => {
                             present({
-                                header: 'Add Expense Category',
+                                header: 'Añadir Categoria de Gastos',
                                 inputs: [
                                     {
                                         name: 'cat',
                                         type: 'text',
-                                        placeholder: 'New Category'
+                                        placeholder: 'Nueva Categoria'
                                     },
                                 ],
                                 buttons: [
-                                    'Cancel',
+                                    'Cancelar',
                                     { text: 'Ok', handler: (d) => addCat(d.cat, '-') },
                                 ],
                             })
-                        }}>Add</IonButton>
+                        }}>Añadir</IonButton>
                     </IonListHeader>
                     {showXpCat()}
                 </IonList>

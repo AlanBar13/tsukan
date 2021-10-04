@@ -7,19 +7,19 @@ const Settings: React.FC = () => {
             <IonContent>
                 <IonList>
                     <IonListHeader>
-                        <IonLabel>Settings</IonLabel>
+                        <IonLabel>Ajustes</IonLabel>
                     </IonListHeader>
                 </IonList>
                 <IonItem button routerLink="/settings/categories" >
                     <IonLabel>
-                        <h2>Categories</h2>
-                        <p>Change displayed categories</p>
+                        <h2>Categorias</h2>
+                        <p>Cambiar categorias</p>
                     </IonLabel>
                 </IonItem>
                 <IonItem button routerLink="/settings/reminders">
                     <IonLabel>
-                        <h2>Reminders</h2>
-                        <p>Set reminders</p>
+                        <h2>Recordatorios</h2>
+                        <p>Añadir recordatorios (Permisos requeridos)</p>
                     </IonLabel>
                 </IonItem>
             </IonContent>

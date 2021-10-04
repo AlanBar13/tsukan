@@ -14,9 +14,9 @@ const AddReminderMd: React.FC<{ onDismiss: () => void; onSave: (body: string, se
     return (
         <IonContent>
             <IonToolbar>
-                <IonTitle>Add Reminder</IonTitle>
+                <IonTitle>Recordatorios</IonTitle>
                 <IonButtons slot="end">
-                    <IonButton onClick={onDismiss}>Close</IonButton>
+                    <IonButton onClick={onDismiss}>Cerrar</IonButton>
                 </IonButtons>
             </IonToolbar>
             <IonList>
@@ -77,7 +77,7 @@ const AddReminderMd: React.FC<{ onDismiss: () => void; onSave: (body: string, se
                     <IonButton expand="block" onClick={() => {
                         onSave(body, selected, selectedDate, day)
                         onDismiss()
-                        }}>Save</IonButton>
+                        }}>Guardar</IonButton>
             </IonList>
         </IonContent>
     )

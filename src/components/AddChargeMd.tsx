@@ -34,39 +34,39 @@ const AddChargeMd: React.FC<{ onDismiss: () => void; addItem: (title: string, ca
     return (
         <IonContent>
             <IonToolbar>
-                <IonTitle>Add</IonTitle>
+                <IonTitle>Añadir</IonTitle>
                 <IonButtons slot="end">
-                    <IonButton onClick={onDismiss}>Close</IonButton>
+                    <IonButton onClick={onDismiss}>Cerrar</IonButton>
                 </IonButtons>
             </IonToolbar>
             <IonList>
                 <IonListHeader>
-                    <IonLabel>New Item</IonLabel>
+                    <IonLabel>Nueva Transacción</IonLabel>
                 </IonListHeader>
                 <IonItem className="input">
-                    <IonLabel position="floating">Title</IonLabel>
+                    <IonLabel position="floating">Titulo</IonLabel>
                     <IonInput onIonChange={(e) => setTitle(e.detail.value!)} type="text"></IonInput>
                 </IonItem>
                 <IonItem className="input">
-                    <IonLabel position="floating">Amount</IonLabel>
+                    <IonLabel position="floating">Monto</IonLabel>
                     <IonInput onIonChange={(e) => setAmount(e.detail.value!)} type='number'></IonInput>
                 </IonItem>
                 <IonItem className="input">
-                    <IonLabel position="floating">Type</IonLabel>
+                    <IonLabel position="floating">Tipo</IonLabel>
                     <IonSelect onIonChange={e => handleType(e.detail.value)} >
-                        <IonSelectOption value={'+'}>Income</IonSelectOption>
-                        <IonSelectOption value={'-'}>Expense</IonSelectOption>
+                        <IonSelectOption value={'+'}>Ingreso</IonSelectOption>
+                        <IonSelectOption value={'-'}>Gasto</IonSelectOption>
                     </IonSelect>
                 </IonItem>
                 <IonItem disabled={dis} className="input">
-                    <IonLabel position="floating">Category</IonLabel>
+                    <IonLabel position="floating">Categoria</IonLabel>
                     <IonSelect onIonChange={e => setCategory(e.detail.value)}>
                         {showCategories()}
                     </IonSelect>
                 </IonItem>
             </IonList>
             <br />
-            <IonButton onClick={onSave} expand="block">Save</IonButton>
+            <IonButton onClick={onSave} expand="block">Guardar</IonButton>
         </IonContent>
     )
 }

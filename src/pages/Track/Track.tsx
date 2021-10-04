@@ -46,14 +46,14 @@ const Settings: React.FC = () => {
             <IonContent>
                 <IonList>
                     <IonListHeader>
-                        <IonLabel>Tracking</IonLabel>
+                        <IonLabel>Seguimiento</IonLabel>
                     </IonListHeader>
                 </IonList>
                 {hasData ? 
                     <div>
                         <IonCard>
                             <IonCardHeader>
-                                <IonCardTitle>Total Expenses By Month</IonCardTitle>
+                                <IonCardTitle>Gastos Totales por Mes</IonCardTitle>
                             </IonCardHeader>
                             <IonCardContent>
                                 <Line data={lineData} />
@@ -61,7 +61,7 @@ const Settings: React.FC = () => {
                         </IonCard>
                         <IonCard>
                             <IonCardHeader>
-                                <IonCardTitle>Top 3 Expense Category Most Used</IonCardTitle>
+                                <IonCardTitle>Top 3 Categorias de Gastos Mas Usados</IonCardTitle>
                             </IonCardHeader>
                             <IonCardContent>
                                 <Doughnut data={catXpData} options={{ maintainAspectRatio: true }} />
@@ -69,14 +69,14 @@ const Settings: React.FC = () => {
                         </IonCard>
                         <IonCard>
                             <IonCardHeader>
-                                <IonCardTitle>Top 3 Income Category Most Used</IonCardTitle>
+                                <IonCardTitle>Top 3 Categorias de Ingresos Mas Usados</IonCardTitle>
                             </IonCardHeader>
                             <IonCardContent>
                                 <Doughnut data={catInData} options={{ maintainAspectRatio: true }} />
                             </IonCardContent>
                         </IonCard>
                     </div> :
-                    <IonLabel>Please add transactions</IonLabel>
+                    <IonLabel>Por favor añade mas Transacciónes</IonLabel>
                 }
                 
             </IonContent>
