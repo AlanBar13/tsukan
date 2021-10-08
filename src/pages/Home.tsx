@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonLabel, IonGrid, IonRow, IonCol, IonList, IonListHeader, IonFab, IonIcon, IonFabButton, useIonModal } from '@ionic/react';
+import { IonContent, IonPage, IonLabel, IonGrid, IonRow, IonCol, IonList, IonListHeader, IonFab, IonIcon, IonFabButton, useIonModal, useIonAlert } from '@ionic/react';
 import { useState, useEffect} from 'react'
 import { add } from 'ionicons/icons';
 
@@ -44,7 +44,6 @@ const Home: React.FC = () => {
             sign,
             timestamp: dt.toISOString()
         }
-        console.log(newItem)
         const newArr = [newItem, ...list]
         setList(newArr)
         setStorageList(newArr, key)
@@ -71,15 +70,26 @@ const Home: React.FC = () => {
     }
 
     const deleteItem = async (id: string) => {
-        const filteredArr =  list.filter((item) => item.id !== id)
-        console.log(filteredArr)
+        const filteredArr = list.filter((item) => item.id !== id)
         await setList(filteredArr)
         setStorageList(filteredArr, key)
     }
 
+    const editItem = async (id: string, title: string, amount: number) => {
+        const newArr = list.map((item) => {
+            if (item.id === id){
+                return {...item, title, amount: Number(amount)}
+            }else{
+                return item
+            }
+        })
+        await setList(newArr)
+        setStorageList(newArr, key)
+    }
+
     const showList = (items: Item[]) => {
         return items.map((i) => {
-            return <ListItem key={i.id} deleteItem={deleteItem} item={i} />
+            return <ListItem key={i.id} deleteItem={deleteItem} editItem={editItem} item={i} />
         })
     }
 
