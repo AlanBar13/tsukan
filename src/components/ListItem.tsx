@@ -1,16 +1,26 @@
-import { IonItem, IonLabel, IonIcon, IonItemSliding, IonItemOptions, IonItemOption, useIonAlert, } from '@ionic/react'
+import { IonItem, IonLabel, IonIcon, IonItemSliding, IonItemOptions, IonItemOption, useIonModal, } from '@ionic/react'
 import { addCircleOutline, removeCircleOutline, trashOutline, createOutline } from 'ionicons/icons';
 import { Item } from '../models'
 import moment from 'moment';
 import "./ListItem.css"
 
+import EditTransaction from './EditTransactions';
+
 const numberWithCommas = (x: string) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-const ListItem: React.FC<{ item: Item, deleteItem: (id: string) => void, editItem: (id: string, title: string, amount: number) => void }> = ({ item, deleteItem, editItem }) => {
-
-    const [present] = useIonAlert()
+const ListItem: React.FC<{ item: Item, deleteItem: (id: string) => void, editItem: (id: string, title: string, amount: number, category: string) => void }> = ({ item, deleteItem, editItem }) => {
+    const handleDismiss = () => {
+        dismiss()
+    }
+    
+    const [present, dismiss] = useIonModal(EditTransaction, {
+        onDismiss: handleDismiss,
+        editItem,
+        item,
+    })
+    
     return (
         <div className="list-item">
             <IonItemSliding id={item.id}>
@@ -27,36 +37,7 @@ const ListItem: React.FC<{ item: Item, deleteItem: (id: string) => void, editIte
                 </IonItem>
                 <IonItemOptions side="end">
                     <IonItemOption color="secondary">
-                        <IonIcon slot="icon-only" onClick={() => {
-                            present({
-                                header: 'Editar Titulo y Monto',
-                                inputs: [
-                                    {
-                                        name: 'title',
-                                        type: 'text',
-                                        label: 'Titulo',
-                                        value: item.title
-                                    },
-                                    {
-                                        name: 'amount',
-                                        type: 'number',
-                                        label: 'Monto',
-                                        value: item.amount
-                                    }
-                                ],
-                                buttons: [
-                                    {text: 'Cancelar', handler: (d) => {
-                                        const slidingItem = document.getElementById(item.id) as any
-                                        slidingItem.close()
-                                    }},
-                                    { text: 'Ok', handler: (d) => {
-                                        editItem(item.id, d.title, d.amount)
-                                        const slidingItem = document.getElementById(item.id) as any
-                                        slidingItem.close()
-                                    } },
-                                ],
-                            })
-                        }} icon={createOutline} />
+                        <IonIcon slot="icon-only" onClick={() => present()} icon={createOutline} />
                     </IonItemOption>
                     <IonItemOption color="danger">
                         <IonIcon slot="icon-only" onClick={() => deleteItem(item.id)} icon={trashOutline} />

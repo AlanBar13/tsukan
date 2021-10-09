@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonLabel, IonGrid, IonRow, IonCol, IonList, IonListHeader, IonFab, IonIcon, IonFabButton, useIonModal, useIonAlert } from '@ionic/react';
+import { IonContent, IonPage, IonLabel, IonGrid, IonRow, IonCol, IonList, IonListHeader, IonFab, IonIcon, IonFabButton, useIonModal, IonSelect, IonSelectOption } from '@ionic/react';
 import { useState, useEffect} from 'react'
 import { add } from 'ionicons/icons';
 
@@ -8,9 +8,14 @@ import AddChargeMd from '../components/AddChargeMd'
 import { setStorageList, readSotrageList } from '../services/storageService'
 import { Item } from '../models'
 import { nanoid } from 'nanoid'
+import _ from 'lodash';
 
 import './Home.css';
 const key = "_xplist"
+
+const customActionSheetOptions = {
+    header: 'Orden por:',
+  };
 
 const numberWithCommas = (x: string) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -21,6 +26,7 @@ const Home: React.FC = () => {
     const [xpense, setXpense] = useState<string>("0")
     const [income, setIncome] = useState<string>("0")
     const [total, setTotal] = useState<string>("0")
+    const [order, setOrder] = useState<string>("recents")
 
     useEffect(() => {
         setList(readSotrageList(key))
@@ -75,10 +81,10 @@ const Home: React.FC = () => {
         setStorageList(filteredArr, key)
     }
 
-    const editItem = async (id: string, title: string, amount: number) => {
+    const editItem = async (id: string, title: string, amount: number, category: string) => {
         const newArr = list.map((item) => {
             if (item.id === id){
-                return {...item, title, amount: Number(amount)}
+                return {...item, title, amount: Number(amount), category}
             }else{
                 return item
             }
@@ -91,6 +97,18 @@ const Home: React.FC = () => {
         return items.map((i) => {
             return <ListItem key={i.id} deleteItem={deleteItem} editItem={editItem} item={i} />
         })
+    }
+
+    const sortList = (type: string) => {
+        setOrder(type)
+        let newArr
+        if(type === "category"){
+            newArr = _.orderBy(list, ["category"], ["asc"])
+        }else{
+            newArr = _.orderBy(list, ["timestamp"], ["desc"])
+        }
+        console.log(newArr)
+        setList(newArr)
     }
 
     return (
@@ -121,6 +139,10 @@ const Home: React.FC = () => {
                 <IonList>
                     <IonListHeader>
                         <IonLabel>Transacciones recientes</IonLabel>
+                        <IonSelect style={{ fontSize: "12px"}} interfaceOptions={customActionSheetOptions} value={order} onIonChange={e => sortList(e.detail.value)}>
+                            <IonSelectOption value="recents">Recientes</IonSelectOption>
+                            <IonSelectOption value="category">Categoria</IonSelectOption>
+                        </IonSelect>
                     </IonListHeader>
                     { showList(list) }
                 </IonList>
