@@ -81,15 +81,17 @@ const Home: React.FC = () => {
         setStorageList(filteredArr, key)
     }
 
-    const editItem = async (id: string, title: string, amount: number, category: string) => {
+    const editItem = async (id: string, title: string, amount: number, category: string, date: string) => {
+        await sortList(order)
         const newArr = list.map((item) => {
             if (item.id === id){
-                return {...item, title, amount: Number(amount), category}
+                return {...item, title, amount: Number(amount), category, timestamp: date}
             }else{
                 return item
             }
         })
         await setList(newArr)
+        await sortList(order)
         setStorageList(newArr, key)
     }
 
@@ -107,7 +109,6 @@ const Home: React.FC = () => {
         }else{
             newArr = _.orderBy(list, ["timestamp"], ["desc"])
         }
-        console.log(newArr)
         setList(newArr)
     }
 

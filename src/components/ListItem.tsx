@@ -10,7 +10,7 @@ const numberWithCommas = (x: string) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-const ListItem: React.FC<{ item: Item, deleteItem: (id: string) => void, editItem: (id: string, title: string, amount: number, category: string) => void }> = ({ item, deleteItem, editItem }) => {
+const ListItem: React.FC<{ item: Item, deleteItem: (id: string) => void, editItem: (id: string, title: string, amount: number, category: string, date: string) => void }> = ({ item, deleteItem, editItem }) => {
     const handleDismiss = () => {
         dismiss()
     }

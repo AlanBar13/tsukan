@@ -1,13 +1,14 @@
-import { IonLabel, IonList, IonListHeader, IonToolbar, IonButtons, IonButton, IonTitle, IonItem, IonInput, IonSelect, IonSelectOption, IonContent } from '@ionic/react';
+import { IonLabel, IonList, IonListHeader, IonToolbar, IonButtons, IonButton, IonTitle, IonItem, IonInput, IonSelect, IonSelectOption, IonContent, IonDatetime } from '@ionic/react';
 import { useState, useEffect } from 'react'
 import { readArray } from '../services/categoriesService'
 import { Item } from '../models'
 
-const EditTransaction: React.FC<{ onDismiss: () => void; editItem: (id: string, title: string, amount: number, category: string) => void; item: Item }> = ({ onDismiss, editItem, item }) => {
+const EditTransaction: React.FC<{ onDismiss: () => void; editItem: (id: string, title: string, amount: number, category: string, date: string) => void; item: Item }> = ({ onDismiss, editItem, item }) => {
    const [title, setTitle] = useState<string>(item.title)
    const [amount, setAmount] = useState<string>(String(item.amount))
    const [category, setCategory] = useState<string>(item.category)
    const [sign, setSign] = useState<string>(item.sign)
+   const [date, setDate] = useState<string>(item.timestamp)
    const [categories, setCategories] = useState<string[]>([])
 
    const sldItem = document.getElementById(item.id) as any
@@ -32,7 +33,7 @@ const EditTransaction: React.FC<{ onDismiss: () => void; editItem: (id: string, 
     }
 
     const onSave = () => {
-        editItem(item.id, title, Number(amount), category)
+        editItem(item.id, title, Number(amount), category, date)
         onDismiss()
         sldItem.close()
     }
@@ -68,10 +69,27 @@ const EditTransaction: React.FC<{ onDismiss: () => void; editItem: (id: string, 
                     </IonSelect>
                 </IonItem>
                 <IonItem className="input">
-                    <IonLabel position="floating">Categoria</IonLabel>
+                    <IonLabel>Categoria</IonLabel>
                     <IonSelect value={category} onIonChange={e => setCategory(e.detail.value)}>
                         {showCategories()}
                     </IonSelect>
+                </IonItem>
+                <IonItem className="input">
+                    <IonLabel position="floating">Fecha de Transacción</IonLabel>
+                    <IonDatetime 
+                        displayFormat="DD MMM YY"
+                        monthShortNames="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
+                        value={date} 
+                        onIonChange={e => setDate(e.detail.value!)}>
+                    </IonDatetime>
+                </IonItem>
+                <IonItem className="input">
+                    <IonLabel position="floating">Hora de Transacción</IonLabel>
+                    <IonDatetime 
+                        displayFormat="HH:mm"
+                        value={date} 
+                        onIonChange={e => setDate(e.detail.value!)}>
+                    </IonDatetime>
                 </IonItem>
             </IonList>
             <br />
