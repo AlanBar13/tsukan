@@ -1,5 +1,5 @@
 import { IonContent, IonPage, IonLabel, IonGrid, IonRow, IonCol, IonList, IonListHeader, IonFab, IonIcon, IonFabButton, useIonModal, IonSelect, IonSelectOption } from '@ionic/react';
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { add } from 'ionicons/icons';
 
 import ListItem from '../components/ListItem'
@@ -15,14 +15,14 @@ const key = "_xplist"
 
 const customActionSheetOptions = {
     header: 'Orden por:',
-  };
+};
 
 const numberWithCommas = (x: string) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-const Home: React.FC = () => {  
-    const [list, setList] = useState<Item[]>([])  
+const Home: React.FC = () => {
+    const [list, setList] = useState<Item[]>([])
     const [xpense, setXpense] = useState<string>("0")
     const [income, setIncome] = useState<string>("0")
     const [total, setTotal] = useState<string>("0")
@@ -53,7 +53,7 @@ const Home: React.FC = () => {
         const newArr = [newItem, ...list]
         setList(newArr)
         setStorageList(newArr, key)
-    } 
+    }
 
     const [present, dismiss] = useIonModal(AddChargeMd, {
         onDismiss: handleDimiss,
@@ -63,9 +63,9 @@ const Home: React.FC = () => {
     const getTotal = (items: Item[]) => {
         let xp = 0, inc = 0, ttl = 0
         items.map((i) => {
-            if(i.sign === '+'){
+            if (i.sign === '+') {
                 inc = inc + i.amount
-            }else{
+            } else {
                 xp = xp + i.amount
             }
         })
@@ -82,17 +82,15 @@ const Home: React.FC = () => {
     }
 
     const editItem = async (id: string, title: string, amount: number, category: string, date: string) => {
-        await sortList(order)
         const newArr = list.map((item) => {
-            if (item.id === id){
-                return {...item, title, amount: Number(amount), category, timestamp: date}
-            }else{
+            if (item.id === id) {
+                return { ...item, title, amount: Number(amount), category, timestamp: date }
+            } else {
                 return item
             }
         })
-        await setList(newArr)
-        await sortList(order)
-        setStorageList(newArr, key)
+        const orderedList = sortList(order, newArr)
+        setStorageList(orderedList, key)
     }
 
     const showList = (items: Item[]) => {
@@ -101,15 +99,15 @@ const Home: React.FC = () => {
         })
     }
 
-    const sortList = (type: string) => {
-        setOrder(type)
+    const sortList = (type: string, listToOrder = list) => {
         let newArr
-        if(type === "category"){
-            newArr = _.orderBy(list, ["category"], ["asc"])
-        }else{
-            newArr = _.orderBy(list, ["timestamp"], ["desc"])
+        if (type === "category") {
+            newArr = _.orderBy(listToOrder, ["category"], ["asc"])
+        } else {
+            newArr = _.orderBy(listToOrder, ["timestamp"], ["desc"])
         }
         setList(newArr)
+        return newArr
     }
 
     return (
@@ -140,12 +138,15 @@ const Home: React.FC = () => {
                 <IonList>
                     <IonListHeader>
                         <IonLabel>Transacciones recientes</IonLabel>
-                        <IonSelect style={{ fontSize: "12px"}} interfaceOptions={customActionSheetOptions} value={order} onIonChange={e => sortList(e.detail.value)}>
+                        <IonSelect style={{ fontSize: "12px" }} interfaceOptions={customActionSheetOptions} value={order} onIonChange={e => {
+                            setOrder(e.detail.value)
+                            sortList(e.detail.value)
+                        }}>
                             <IonSelectOption value="recents">Recientes</IonSelectOption>
                             <IonSelectOption value="category">Categoria</IonSelectOption>
                         </IonSelect>
                     </IonListHeader>
-                    { showList(list) }
+                    {showList(list)}
                 </IonList>
                 <IonFab vertical="bottom" horizontal="end" slot="fixed">
                     <IonFabButton onClick={() => {

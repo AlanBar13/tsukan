@@ -11,7 +11,7 @@ const Settings: React.FC = () => {
         labels: [],
         datasets: [
           {
-            label: 'Expenses',
+            label: 'Gastos',
             data: [],
             fill: false,
             backgroundColor: 'rgb(36, 97, 15)',

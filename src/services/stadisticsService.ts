@@ -17,7 +17,6 @@ const lineExpenseData = () => {
     return
   }
   const result = _.groupBy(list, monthName)
-  console.log(result)
   const labels = Object.keys(result).reverse()
   const data: number[] = []
   labels.map(item => {
@@ -25,14 +24,14 @@ const lineExpenseData = () => {
     data.push(_.sumBy(xpenses, 'amount'))
   })
 
-  const top5Labels = _.take(labels, 5)
-  const top5Data = _.take(data, 5)
+  const top5Labels = _.takeRight(labels, 5)
+  const top5Data = _.takeRight(data, 5)
 
   const res: ChartData = {
     labels: top5Labels,
     datasets: [
       {
-        label: 'Expenses',
+        label: 'Gastos',
         data: top5Data,
         fill: false,
         backgroundColor: 'rgb(36, 97, 15)',

@@ -10,6 +10,8 @@ const EditTransaction: React.FC<{ onDismiss: () => void; editItem: (id: string, 
    const [sign, setSign] = useState<string>(item.sign)
    const [date, setDate] = useState<string>(item.timestamp)
    const [categories, setCategories] = useState<string[]>([])
+   const now = new Date().toISOString()
+   const mxDate = now.substring(0, 10)
 
    const sldItem = document.getElementById(item.id) as any
    
@@ -79,6 +81,7 @@ const EditTransaction: React.FC<{ onDismiss: () => void; editItem: (id: string, 
                     <IonDatetime 
                         displayFormat="DD MMM YY"
                         monthShortNames="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
+                        max={mxDate}
                         value={date} 
                         onIonChange={e => setDate(e.detail.value!)}>
                     </IonDatetime>
