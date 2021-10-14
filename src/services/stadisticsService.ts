@@ -58,7 +58,7 @@ const getExpCatData = () => {
   const xpCatLabels = Object.keys(orderedList)
   const data: number[] = []
   xpCatLabels.map((item) => {
-    data.push(orderedList[item].length)
+    data.push(_.sumBy(orderedList[item], 'amount'))
   })
 
   const labelsTop3 = _.take(xpCatLabels, 3)
@@ -96,7 +96,7 @@ const getIncCatData = () => {
   const inCatLabels = Object.keys(orderedList)
   const data: number[] = []
   inCatLabels.map((item) => {
-    data.push(orderedList[item].length)
+    data.push(_.sumBy(orderedList[item], 'amount'))
   })
 
   const labelsTop3 = _.take(inCatLabels, 3)

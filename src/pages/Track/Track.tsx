@@ -64,7 +64,20 @@ const Settings: React.FC = () => {
                                 <IonCardTitle>Top 3 Categorias de Gastos Mas Usados</IonCardTitle>
                             </IonCardHeader>
                             <IonCardContent>
-                                <Doughnut data={catXpData} options={{ maintainAspectRatio: true }} />
+                                <Doughnut data={catXpData} options={{ 
+                                    maintainAspectRatio: true, 
+                                    plugins: {
+                                        tooltip: {
+                                            callbacks: {
+                                                label: (context) => {
+                                                    var label = context.label || ''
+                                                    var value = context.parsed || 0
+                                                    return `${label}: $ ${value}`
+                                                }
+                                            }
+                                        }
+                                    } 
+                                }} />
                             </IonCardContent>
                         </IonCard>
                         <IonCard>
@@ -72,7 +85,20 @@ const Settings: React.FC = () => {
                                 <IonCardTitle>Top 3 Categorias de Ingresos Mas Usados</IonCardTitle>
                             </IonCardHeader>
                             <IonCardContent>
-                                <Doughnut data={catInData} options={{ maintainAspectRatio: true }} />
+                                <Doughnut data={catInData} options={{ 
+                                    maintainAspectRatio: true, 
+                                    plugins: {
+                                        tooltip: {
+                                            callbacks: {
+                                                label: (context) => {
+                                                    var label = context.label || ''
+                                                    var value = context.parsed || 0
+                                                    return `${label}: $ ${value}`
+                                                }
+                                            }
+                                        }
+                                    } 
+                                }} />
                             </IonCardContent>
                         </IonCard>
                     </div> :
